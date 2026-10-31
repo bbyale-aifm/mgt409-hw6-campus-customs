@@ -284,9 +284,9 @@ None needed: the first prompt did the job.
 
 > Okay please double check this html. There are bugs with it, such as the toggles not working. Also the page is a little boring, please restyle it - with a more unique design.
 
-### Follow-up prompt 2 (my words)
+### What was lacking in the first prompt
 
-> With the recommendation, I want to find a more manageable method for a manager. It seems like a lot of work to have to approve each payment. are there alternatives that we can explore? Also on the page include up front the monthly cost.
+What was lacking in the first prompt was a clear design direction: the first page had toggles that did not work and looked plain, so I asked for a bug check and a more unique restyle.
 
 ---
 

@@ -59,18 +59,20 @@ layers_all15 = {s: agg(s, practice + extra) for s in SET}
 # ---------- 4. exam + red team
 exam = load("exam_results.json")
 rt = load("red_team_results.json")
+rt_v1 = load("red_team_results_v1.json")
 
 
-def rt_summary(doc, setup):
-    rs = [r for r in rt if r["document"] == doc and r["setup"] == setup]
+def rt_summary(rows, doc, setup):
+    rs = [r for r in rows if r["document"] == doc and r["setup"] == setup]
     return {"runs": len(rs), "worked": sum(r["attack_succeeded"] for r in rs), "traps": sum(r["trap_tool_called"] for r in rs),
             "price": rs[0]["answer"]["unit_price"], "decision": rs[0]["answer"]["decision"]}
 
 
-redteam = {d: {"none": rt_summary(d, "none"), "all": rt_summary(d, "all")} for d in
-           ("attack_01.html", "attack_02.pdf", "attack_03.html", "attack_04.pdf")}
-redteam["whatif"] = {s: rt_summary("attack_02.pdf", s) for s in
-                     ("none + metadata exposed", "design only + metadata exposed", "prompt only + metadata exposed")}
+redteam = {d: {s: rt_summary(rt, d, s) for s in SET} for d in ("attack_01.html", "attack_02.pdf")}
+v1_docs = ("attack_01.html", "attack_02.pdf", "attack_03.html", "attack_04.pdf")
+redteam_v1 = {"none_fooled": sum(rt_summary(rt_v1, d, "none")["worked"] for d in v1_docs), "none_runs": 3 * len(v1_docs),
+              "false_refusals": sum(rt_summary(rt_v1, d, "all")["worked"] for d in ("attack_03.html", "attack_04.pdf")),
+              "false_refusal_runs": 6}
 
 # ---------- 5. cost model for the recommendation
 exam_cost = sum(r["cost_usd"] for r in exam) / len(exam)
@@ -102,7 +104,7 @@ rec_rate = len(approvals) / n_tested
 
 PRICES = json.loads((ROOT / "data" / "prices.json").read_text())["gpt-6-luna"]
 DATA = {"approvals": approvals, "rec_rate": rec_rate, "n_tested": n_tested, "prices": PRICES, "cache": cache, "attacks": attacks, "layers": layers, "layers15": layers_all15, "exam": exam,
-        "redteam": redteam, "cost": cost_model, "n_practice": len(practice), "n_extra": len(extra)}
+        "redteam": redteam, "redteam_v1": redteam_v1, "cost": cost_model, "n_practice": len(practice), "n_extra": len(extra)}
 blob = json.dumps(DATA).replace("</", "<\\/")
 html = (ROOT / "report_template.html").read_text().replace("/*__DATA__*/null", blob)
 (O / "hw6_report.html").write_text(html)

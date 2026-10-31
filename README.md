@@ -48,7 +48,7 @@ Each run prints the structured answer and token usage, and appends to `output/us
 | 4 Cache test | `python cache_test.py` then `python make_cache_report.py` | `output/cache_test.json`, `cache_test.md` |
 | 5 Attack | `python attack_test.py` | `output/attack_results.json`, `attack_results.md` |
 | 6 Defend | `python defense_test.py` then `python make_defense_report.py` | `output/defense_results.json`, `defense_results.md`, `defense_ablation.json` |
-| 7 Red team | `python make_my_attacks.py` then `python red_team_test.py` | `data/my_attacks/`, `output/red_team.md`, `red_team_results.json` |
+| 7 Red team | `python make_my_attacks.py` then `python red_team_test.py` | `data/my_attacks/` (2 files), `output/red_team.md`, `red_team_results.json` |
 | 8 Exam | `python exam_run.py` | `output/exam_results.json`, `exam_audit.json` |
 | 9 Report page | `python build_report.py` | `output/hw6_report.html` |
 
@@ -74,12 +74,12 @@ agent.py tools.py models.py   the agent, its tools and its output models
 sanitize.py policy.py         defense layers 1 and 2
 prompts/             prompt.md (strict) and prompt_baseline.md
 data/                course data: handbook, prices, practice docs and key, exam docs
-  my_attacks/        red-team files (attack_01 and attack_02 as assigned, plus two extras)
-  extra_attacks/     three extra visible-text attacks used in Problem 6
+  my_attacks/        the two red-team attack files (attack_01.html, attack_02.pdf)
+  extra_attacks/     three visible-text attacks (Problem 6) and my first-version red-team files (v1_*)
 output/              every result, report and log
 *_test.py, make_*.py, build_report.py, report_template.html, exam_run.py   scripts that produce the outputs
 ```
 
 ## Known limits
 
-The code layer does not read CSS rules in `<style>` blocks and cannot see PDF text covered by a white box, so two of my extra attacks turn good quotes into false refusals (safe, but costly). See `output/red_team.md`. A proposed approval policy for payments is in `output/approval_policy.md`.
+The code layer does not read CSS rules in `<style>` blocks and cannot see PDF text covered by a white box; my two red-team attacks use exactly those tricks and fool the undefended agent and the code layer alone (the design and prompt layers still stop them). See `output/red_team.md`. A proposed approval policy for payments is in `output/approval_policy.md`.
