@@ -287,3 +287,25 @@ None needed: the first prompt did the job.
 ### Follow-up prompt 2 (my words)
 
 > With the recommendation, I want to find a more manageable method for a manager. It seems like a lot of work to have to approve each payment. are there alternatives that we can explore? Also on the page include up front the monthly cost.
+
+---
+
+## Problem 10: Push to GitHub and submit the URL
+
+### Prompt 1 (my words)
+
+> Okay now we are at Problem 10:
+>
+> Problem 10: Push to Github and submit the URL
+>
+> Publish the project to public GitHub repository. Ensure it can be cloned for graders, ensure it can opens, files are there.
+>
+> Include the data/ folder, which includes the course data + two attack files. Do not commit my real .env. Use .gitignore to keep out the real .env and include .env.example with placeholders.
+>
+> Include a note in readme.md on how to run the agent.
+>
+> The repository should look like this: (I attached a picture of the expected repo tree.)
+
+### Follow-up prompt
+
+None needed: the first prompt did the job.
