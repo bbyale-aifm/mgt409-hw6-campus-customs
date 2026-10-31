@@ -288,6 +288,12 @@ None needed: the first prompt did the job.
 
 What was lacking in the first prompt was a clear design direction: the first page had toggles that did not work and looked plain, so I asked for a bug check and a more unique restyle.
 
+### Why I added more prompts (my words)
+
+I added in another prompt because I felt the style was a bit boring, and I noticed that the toggles did not work.
+
+I also did not like the recommendation and wanted to revise it. It seemed unreasonable to have someone review every single payment, and I wanted the mean and median to determine the boundary for AI review and where a human review was needed.
+
 ---
 
 ## Problem 10: Push to GitHub and submit the URL
